@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        font-family:'Kanit',sans-serif;
+    }
+    h1 {
+        font-size:90px;
+        text-align:center;
+    }
+    h2 {
+        font-size:120px;
+        padding:auto;
+        width:fit-content;
+        margin:auto;
+        border:5px solid black;
+        padding:20px;
+        padding-right:100px;
+        padding-left:100px;
+    }
+    #timer {
+        font-size:80px;
+        text-align:center;
+    }
+    .party {
+        animation:party 2s linear infinite;
+    }
+    @keyframes party {
+        0% {background:#ff5b5b}
+        16.7% {background:#ffa25b}
+        33.4% {background:#fff45b}
+        50% {background:#5bff5e}
+        66.7% {background:#5b8fff}
+        83.7% {background:#a55bff}
+        100% {background:#ff5b5b}
+    }
+</style>
+<body>
+    <h1>Is it Break?</h1>
+    
+    <h2 id="jack">No</h2>
+
+    <h3 id="timer">00:00:00</h3>
+</body>
+<script>
+    let jack = document.getElementById("jack");
+    let hr = 0;
+    let min = 0;
+    let sec = 0;
+    let zero = "";
+    let zero2 = "";
+    checkForBreak();
+    setInterval(checkForBreak,10);
+    function checkForBreak() {
+        const d = new Date();
+        hr = 17 - d.getHours();
+        min = 29 - d.getMinutes();
+        sec = 59 - d.getSeconds();
+        if (min < 0) {
+            min += 60;
+            hr -= 1;
+        }
+        if (hr < 0) {
+            hr += 24;
+        }
+        if (sec.toString().length < 2) {
+            zero2 = "0";
+        } else {
+            zero2 = "";
+        }
+        if (min.toString().length < 2) {
+            zero = "0";
+        } else {
+            zero = "";
+        }
+        if (d.getMinutes() >= 30 && d.getMinutes() <= 45 && d.getHours() == 17) {
+            jack.innerHTML = "Yes";
+            jack.style.color = "#50ff47";
+            jack.style.borderColor = "#50ff47";
+            document.getElementById("timer").innerHTML = "00:00:00";
+            jack.className = "party";
+        } else {
+            jack.innerHTML = "No";
+            jack.style.color = "red";
+            jack.style.borderColor = "red";
+            document.getElementById("timer").innerHTML = hr + ":" + zero + min + ":" + zero2 + sec;
+            jack.className = "";
+        }
+    }
+</script>
+</html>
