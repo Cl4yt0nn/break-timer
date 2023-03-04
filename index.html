@@ -10,8 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 </head>
 <style>
-    * {
+    body {
         font-family:'Kanit',sans-serif;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
     }
     h1 {
         font-size:90px;
@@ -43,13 +49,29 @@
         83.7% {background:#a55bff}
         100% {background:#ff5b5b}
     }
+    #confetti{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0px;
+    }
+    #peter{
+        position: absolute;
+        width: 150px;
+        height: 150px;
+    }
 </style>
 <body>
+    <img src="./confetti-8.gif" id="confetti"/>
+    <img src="./petergriffin.gif" id="peter"/>
     <h1>Is it Break?</h1>
     
     <h2 id="jack">No</h2>
 
     <h3 id="timer">00:00:00</h3>
+
+
+
 </body>
 <script>
     let jack = document.getElementById("jack");
@@ -58,8 +80,10 @@
     let sec = 0;
     let zero = "";
     let zero2 = "";
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let p = document.getElementById('peter');
     checkForBreak();
-    setInterval(checkForBreak,10);
+    setInterval(checkForBreak,500);
     function checkForBreak() {
         const d = new Date();
         hr = 17 - d.getHours();
@@ -82,19 +106,45 @@
         } else {
             zero = "";
         }
+
+
         if (d.getMinutes() >= 30 && d.getMinutes() <= 45 && d.getHours() == 17) {
             jack.innerHTML = "Yes";
             jack.style.color = "#50ff47";
             jack.style.borderColor = "#50ff47";
             document.getElementById("timer").innerHTML = "00:00:00";
             jack.className = "party";
+            confetti.style.display='';
+            p.style.display = ''
+            RandomPeter();
         } else {
+            const d = new Date();
+            let day = days[d.getDay()];
+            confetti.style.display='none'
             jack.innerHTML = "No";
             jack.style.color = "red";
             jack.style.borderColor = "red";
             document.getElementById("timer").innerHTML = hr + ":" + zero + min + ":" + zero2 + sec;
             jack.className = "";
+            p.style.display = 'none'
         }
+
+
     }
+    function RandomPeter(){
+        p.display = ''
+      var width = document.body.clientWidth;
+      var height = document.body.clientHeight;
+      console.log(width,height);
+      p.style.left = getRandomInt(150, width - 150) + 'px'
+      p.style.top = getRandomInt(150, height - 150) + 'px'
+
+    }
+    function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 </script>
 </html>
