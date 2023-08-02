@@ -86,7 +86,7 @@
     setInterval(checkForBreak,500);
     function checkForBreak() {
         const d = new Date();
-        hr = 14 - d.getHours();
+        hr = 13 - d.getHours();
         min = 29 - d.getMinutes();
         sec = 59 - d.getSeconds();
         if (min < 0) {
@@ -108,7 +108,7 @@
         }
 
 
-        if (d.getMinutes() >= 30 && d.getMinutes() <= 45 && d.getHours() == 14) {
+        if (d.getMinutes() >= 30 && d.getMinutes() <= 45 && d.getHours() == 13) {
             jack.innerHTML = "Yes";
             jack.style.color = "#50ff47";
             jack.style.borderColor = "#50ff47";
